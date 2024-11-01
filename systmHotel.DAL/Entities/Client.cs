@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace systmHotel.DAL.Entities
 {
-    internal class Client
+    public class Client
     {
         public int ClientID { get; set;}
         public string Name { get; set;}

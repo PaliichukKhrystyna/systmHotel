@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace systmHotel.DAL.Entities
 {
-    internal class Schedule
+    public class Schedule
     {
         public int ScheduleID { get; set; }
         public int EmployeeID { get; set; }
         public DateTime ShiftDate { get; set; }
-        public string ShiftTime { get; set; }
+        public string? ShiftTime { get; set; }
     }
 }
