@@ -5,15 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using systmHotel.DAL.Entities;
 
-namespace systmHotel.BLL
+namespace systmHotel.BLL.Services
 {
-    internal class EmployeeServices
-    { 
+    public class EmployeeServices
+    {
         public EmployeeServices() { }
+
+        private static List<Employee> employees = new List<Employee>();
 
         public Task<List<Employee>> GetEmployeesAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(employees);
         }
 
         public Task AddEmployeeAsync(Employee employee)
@@ -30,9 +32,5 @@ namespace systmHotel.BLL
         {
             throw new NotSupportedException();
         }
-
-
-
     }
-
 }

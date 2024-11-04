@@ -6,8 +6,7 @@ namespace systmHotel.WebApp.Controllers
     public class ClientController : Controller
     {
         public IActionResult Index()
-        {
-            
+        {  return View(); }
         private static List<Client> clients = new List<Client>
         {
             new Client { ClientID = 1, Name = "Sysla", PhoneNumber = "123-456-7890", Email = "jgq3gq3w.com", Password = "password123" },
