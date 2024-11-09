@@ -12,8 +12,8 @@ namespace systmHotel.DAL.Entities
         public int ClientID { get; set; }
         public int RoomID { get; set; }
         public DateTime BookingDate { get; set; }
-        public DateTime CheckInDate { get; set; }
-        public DateTime CheckOutDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public decimal TotalAmount { get; set; }
     }
 }

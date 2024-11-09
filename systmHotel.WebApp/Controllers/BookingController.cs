@@ -53,8 +53,8 @@ namespace systmHotel.WebApp.Controllers
             existingBooking.ClientID = booking.ClientID;
             existingBooking.RoomID = booking.RoomID;
             existingBooking.BookingDate = booking.BookingDate;
-            existingBooking.CheckInDate = booking.CheckInDate;
-            existingBooking.CheckOutDate = booking.CheckOutDate;
+            existingBooking.StartDate = booking.StartDate;
+            existingBooking.EndDate = booking.EndDate;
             existingBooking.TotalAmount = booking.TotalAmount;
 
             return RedirectToAction("Index");

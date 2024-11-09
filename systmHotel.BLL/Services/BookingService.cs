@@ -33,12 +33,5 @@ namespace systmHotel.BLL.Services
         {
             throw new NotSupportedException();
         }
-
-
-
-
-
-
-
     }
 }

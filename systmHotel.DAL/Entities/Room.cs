@@ -10,8 +10,14 @@ namespace systmHotel.DAL.Entities
     {
         public int RoomID { get; set; }
         public string? RoomNumber { get; set; }
-        public string? RoomType { get; set; }
+        public RoomType? RoomType { get; set; }
         public decimal PricePerNight { get; set; }
         public bool IsAvailable { get; set; }
+    }
+    public enum RoomType
+    {
+        Single,
+        Double,
+        ForFamily
     }
 }
