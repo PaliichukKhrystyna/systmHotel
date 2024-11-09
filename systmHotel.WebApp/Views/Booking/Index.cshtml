@@ -1,59 +1,41 @@
-﻿@model IEnumerable<systmHotel.DAL.Entities.Room>
+﻿@model List<systmHotel.DAL.Entities.Booking>
+    @{
+    ViewData["Title"] = "Booking List";
+    }
 
-@{
-    ViewData["Title"] = "index";
-}
+    <h2>Booking List</h2>
+    <a class="btn btn-primary mb-3" asp-action="AddBooking">Add New Booking</a>
 
-<h1>index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PricePerNight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAvailable)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PricePerNight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAvailable)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Client ID</th>
+                <th>Room ID</th>
+                <th>Booking Date</th>
+                <th>Check-In Date</th>
+                <th>Check-Out Date</th>
+                <th>Total Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking.BookingID</td>
+                <td>@booking.ClientID</td>
+                <td>@booking.RoomID</td>
+                <td>@booking.BookingDate.ToShortDateString()</td>
+                <td>@booking.CheckInDate.ToShortDateString()</td>
+                <td>@booking.CheckOutDate.ToShortDateString()</td>
+                <td>@booking.TotalAmount.ToString("C")</td>
+                <td>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@booking.BookingID">Details</a>
+                    <a class="btn btn-warning btn-sm" asp-action="EditBooking" asp-route-id="@booking.BookingID">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-action="DeleteBooking" asp-route-id="@booking.BookingID">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
