@@ -11,7 +11,7 @@ namespace systmHotel.DAL.Entities
         public int EmployeeId { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
-        public Position? Position { get; set; } //Створити клас Посада
+        public Position? Position { get; set; } 
         public DateTime HireDate { get; set; }
         public string? ContactNumber { get; set; }
     }

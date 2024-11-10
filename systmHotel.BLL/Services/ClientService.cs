@@ -36,8 +36,5 @@ namespace systmHotel.BLL.Services
 
 
 
-
-
-
     }
 }
