@@ -7,7 +7,7 @@ using systmHotel.DAL.Entities;
 
 namespace systmHotel.BLL.Services
 {
-    internal class ClientService
+    public class ClientService
     {
 
         public ClientService()
@@ -21,7 +21,7 @@ namespace systmHotel.BLL.Services
 
         public Task AddClientAsync(Client client)
         {
-            throw new NotSupportedException();
+            throw new NotImplementedException("Користувач типу зареєстрований");
         }
 
         public Task UpdateClientAsync(Client client)
