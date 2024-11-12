@@ -7,7 +7,7 @@ using systmHotel.DAL.Entities;
 
 namespace systmHotel.BLL.Services
 {
-    internal class BookingService
+    public class BookingService
     {
 
         public BookingService()
