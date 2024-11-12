@@ -68,7 +68,7 @@ namespace systmHotel.WebApp.Controllers
             {
                 return NotFound();
             }
-            return View(booking);
+            return View("Index");
         }
 
         [HttpPost]
