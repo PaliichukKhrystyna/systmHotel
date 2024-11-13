@@ -25,8 +25,23 @@ namespace systmHotel.DAL.Context.Configuration
                 .IsRequired()
                 .HasColumnName("Client_Id");
 
+            builder.Property(b => b.RoomID)
+               .HasColumnName("Room_ID")
+               .UseIdentityColumn();
 
+            builder.Property(b => b.StartDate)
+              .IsRequired();
 
+            builder.Property(b => b.EndDate)
+               .IsRequired();
+
+            builder.Property(b => b.BookingDate)
+             .IsRequired();
+
+            builder.Property(b => b.IsActive)
+            .IsRequired();
+
+            
             //Звязки 
 
             //Many to many
@@ -34,18 +49,15 @@ namespace systmHotel.DAL.Context.Configuration
                     .WithMany(s => s.Bookings)
                     .UsingEntity(j => j.ToTable("BookingServices"));
 
-
             //one to many
             builder.HasOne(b => b.Client)
                 .WithMany(c => c.Bookings)
                 .HasForeignKey(b => b.ClientID);
 
-
             //one to many
             builder.HasOne(b => b.Room)
                 .WithMany(r => r.Bookings)
                 .HasForeignKey(b => b.RoomID);
-
         }
     }
 }

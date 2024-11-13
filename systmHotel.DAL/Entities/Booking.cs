@@ -16,6 +16,8 @@ namespace systmHotel.DAL.Entities
         public DateTime EndDate { get; set; }
         public decimal TotalAmount { get; set; }
 
+        public bool IsActive { get; set; }  
+
         public virtual Room? Room { get; set; }
         public virtual Client? Client { get; set; }
         public IEnumerable<Service>? Services { get; set; }
