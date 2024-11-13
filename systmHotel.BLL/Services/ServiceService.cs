@@ -1,43 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using systmHotel.DAL.Entities;
+using systmHotel.DAL.IRepository;
 
 namespace systmHotel.BLL.Services
 {
-    internal class ServiceService
+    public class ServiceService
     {
+        private readonly IServiceRepository _serviceRepository;
 
-        public ServiceService()
+        public ServiceService(IServiceRepository serviceRepository)
         {
+            _serviceRepository = serviceRepository;
         }
 
-        public Task<List<Service>> GetServicesAsync()
+        public async Task<IEnumerable<Service>> GetServicesAsync()
         {
-            throw new NotImplementedException();
+            return await _serviceRepository.GetAllServicesAsync();
         }
 
-        public Task AddServiceAsync(Service service)
+        public async Task AddServiceAsync(Service service)
         {
-            throw new NotSupportedException();
+            await _serviceRepository.AddServiceAsync(service);
         }
 
-        public Task UpdateServiceAsync(Service service)
+        public async Task UpdateServiceAsync(Service service)
         {
-            throw new NotSupportedException();
+            await _serviceRepository.UpdateServiceAsync(service);
         }
 
-        public Task DeleteServiceAsync(Service service)
+        public async Task DeleteServiceAsync(int serviceId)
         {
-            throw new NotSupportedException();
+            
+                await _serviceRepository.DeleteServiceAsync(serviceId);
         }
-
-
-
-
-
-
     }
 }

@@ -1,40 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using systmHotel.DAL.Entities;
+using systmHotel.DAL.IRepository;
 
 namespace systmHotel.BLL.Services
 {
     public class ClientService
     {
+        private readonly IClientRepository _clientRepository;
 
-        public ClientService()
+        public ClientService(IClientRepository clientRepository)
         {
+            _clientRepository = clientRepository;
         }
 
-        public Task<List<Client>> GetClientsAsync()
+        public async Task<IEnumerable<Client>> GetClientsAsync()
         {
-            throw new NotImplementedException();
+            return await _clientRepository.GetAllClientsAsync();
         }
 
-        public Task AddClientAsync(Client client)
+        public async Task AddClientAsync(Client client)
         {
-            throw new NotImplementedException("Користувач типу зареєстрований");
+            await _clientRepository.AddClientAsync(client);
         }
 
-        public Task UpdateClientAsync(Client client)
+        public async Task UpdateClientAsync(Client client)
         {
-            throw new NotSupportedException();
+            await _clientRepository.UpdateClientAsync(client);
         }
 
-        public Task DeleteClientAsync(Client client)
+        public async Task DeleteClientAsync(int clientId)
         {
-            throw new NotSupportedException();
+          
+            
+                await _clientRepository.DeleteClientAsync(clientId);
+            
         }
-
-
-
     }
 }
+

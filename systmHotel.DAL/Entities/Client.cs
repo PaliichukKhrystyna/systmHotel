@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace systmHotel.DAL.Entities
-{
+{ 
     public class Client
     {
         public int ClientID { get; set;}
@@ -17,5 +17,8 @@ namespace systmHotel.DAL.Entities
         public string? Password { get; set; }
         public string? PasswordSecret { get; set; }
         public bool Status { get; set; }
+
+        public virtual IEnumerable<Booking>? Bookings { get; set; }
+
     }
 }

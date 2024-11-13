@@ -13,5 +13,7 @@ namespace systmHotel.DAL.Entities
         public Booking? Booking { get; set; }
         public string? ServiceName { get; set; }
         public decimal Price { get; set; }
+
+        public IEnumerable<Booking> Bookings { get; set; }
     }
 }

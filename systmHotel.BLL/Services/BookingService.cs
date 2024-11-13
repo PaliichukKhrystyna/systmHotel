@@ -1,37 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using systmHotel.DAL.Entities;
+using systmHotel.DAL.IRepository;
 
 namespace systmHotel.BLL.Services
 {
     public class BookingService
     {
+        private readonly IBookingRepository _bookingRepository;
 
-        public BookingService()
+        public BookingService(IBookingRepository bookingRepository)
         {
+            _bookingRepository = bookingRepository;
         }
 
-        public Task<List<Booking>> GetBookingsAsync()
+        public async Task<IEnumerable<Booking>> GetBookingsAsync()
         {
-            throw new NotImplementedException();
+            return await _bookingRepository.GetAllBookingsAsync();
         }
 
-        public Task AddBookingAsync(Booking booking)
+        public async Task AddBookingAsync(Booking booking)
         {
-            throw new NotSupportedException();
+            await _bookingRepository.AddBookingAsync(booking);
         }
 
-        public Task UpdateBookingAsync(Booking booking)
+        public async Task UpdateBookingAsync(Booking booking)
         {
-            throw new NotSupportedException();
+            await _bookingRepository.UpdateBookingAsync(booking);
         }
 
-        public Task DeleteBookingAsync(Booking booking)
+        public async Task DeleteBookingAsync(int bookingId)
         {
-            throw new NotSupportedException();
+            await _bookingRepository.DeleteBookingAsync(bookingId);
         }
     }
 }
