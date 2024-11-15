@@ -8,8 +8,6 @@ using systmHotel.DAL.Context;
 using systmHotel.DAL.Entities;
 using systmHotel.DAL.IRepository;
 
-
-
 namespace systmHotel.DAL.Repository
 {
     public class BookingRepository : IBookingRepository

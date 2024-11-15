@@ -12,7 +12,7 @@ namespace systmHotel.DAL.Repository
 {
     public class ClientRepository : IClientRepository
     {
-        private readonly systHotelContext _context;
+         private readonly systHotelContext _context;
 
         public ClientRepository(systHotelContext context)
         {

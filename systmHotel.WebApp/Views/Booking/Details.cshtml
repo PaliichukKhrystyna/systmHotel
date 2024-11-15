@@ -1,12 +1,56 @@
 ﻿@model systmHotel.DAL.Entities.Booking
 
-<h1>Booking Details</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Details</title>
+    <style>
+        dl {
+            width: 300px;
+            margin: 0 auto;
+        }
 
-<p><strong>Client ID:</strong> @Model.ClientID</p>
-<p><strong>Room ID:</strong> @Model.RoomID</p>
-<p><strong>Booking Date:</strong> @Model.BookingDate.ToShortDateString()</p>
-<p><strong>Start Date:</strong> @Model.StartDate.ToShortDateString()</p>
-<p><strong>End Date:</strong> @Model.EndDate.ToShortDateString()</p>
-<p><strong>Total Amount:</strong> @Model.TotalAmount</p>
+        dt {
+            font-weight: bold;
+            margin-top: 10px;
+        }
 
-<a asp-action="Index">Back to List</a>
+        dd {
+            margin-left: 20px;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Booking Details</h1>
+
+    <dl>
+        <dt>Client ID:</dt>
+        <dd>@Model.ClientID</dd>
+
+        <dt>Room ID:</dt>
+        <dd>@Model.RoomID</dd>
+
+        <dt>Booking Date:</dt>
+        <dd>@Model.BookingDate.ToShortDateString()</dd>
+
+        <dt>Start Date:</dt>
+        <dd>@Model.StartDate.ToShortDateString()</dd>
+
+        <dt>End Date:</dt>
+        <dd>@Model.EndDate.ToShortDateString()</dd>
+
+        <dt>Total Amount:</dt>
+        <dd>@Model.TotalAmount</dd>
+    </dl>
+
+    <a asp-action="Index">Back to List</a>
+</body>
+</html>

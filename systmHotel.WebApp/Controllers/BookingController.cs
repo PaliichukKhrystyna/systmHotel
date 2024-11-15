@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using systmHotel.DAL.Entities;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using systmHotel.BLL.Services;
 
 namespace systmHotel.WebApp.Controllers
@@ -15,87 +14,83 @@ namespace systmHotel.WebApp.Controllers
             _service = service;
         }
 
-        public IActionResult Index()
+        // Відображає список бронювань
+        public async Task<IActionResult> Index()
         {
-            // Повертає список бронювань
+            //var bookings = await _service.GetBookingsAsync();
+            //return View(bookings);
             return View(_service.GetBookingsAsync().Result);
         }
 
+        // Відображає форму для додавання нового бронювання
         public IActionResult AddBooking()
         {
-            // Повертає форму для додавання нового бронювання
             return View();
         }
 
+        // Додає нове бронювання
         [HttpPost]
-        public IActionResult AddBooking(Booking booking)
+        public async Task<IActionResult> AddBooking(Booking booking)
         {
-            _service.AddBookingAsync(booking);
-            return RedirectToAction("Index","Client");
+            if (ModelState.IsValid)
+            {
+                await _service.AddBookingAsync(booking);
+                return RedirectToAction("Index");
+            }
+            return View(booking);
         }
 
-        // public IActionResult EditBooking(int id)
-        // {
-        //     // Знаходить бронювання за ID та повертає форму для редагування
-        //     var booking = bookings.FirstOrDefault(b => b.BookingID == id);
-        //     if (booking == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return View(booking);
-        // }
-        //
-        // [HttpPost]
-        // public IActionResult EditBooking(Booking booking)
-        // {
-        //     // Оновлює дані існуючого бронювання
-        //     var existingBooking = bookings.FirstOrDefault(b => b.BookingID == booking.BookingID);
-        //     if (existingBooking == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     existingBooking.ClientID = booking.ClientID;
-        //     existingBooking.RoomID = booking.RoomID;
-        //     existingBooking.BookingDate = booking.BookingDate;
-        //     existingBooking.StartDate = booking.StartDate;
-        //     existingBooking.EndDate = booking.EndDate;
-        //     existingBooking.TotalAmount = booking.TotalAmount;
-        //
-        //     return RedirectToAction("Index");
-        // }
-        //
-        // public IActionResult DeleteBooking(int id)
-        // {
-        //     // Повертає форму для підтвердження видалення
-        //     var booking = bookings.FirstOrDefault(b => b.BookingID == id);
-        //     if (booking == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return View("Index");
-        // }
-        //
-        // [HttpPost]
-        // public IActionResult DeleteConfirmed(int id)
-        // {
-        //     // Видаляє бронювання
-        //     var booking = bookings.FirstOrDefault(b => b.BookingID == id);
-        //     if (booking != null)
-        //     {
-        //         bookings.Remove(booking);
-        //     }
-        //     return RedirectToAction("Index");
-        // }
-        //
-        // public IActionResult Details(int id)
-        // {
-        //     // Повертає деталі бронювання за ID
-        //     var booking = bookings.FirstOrDefault(b => b.BookingID == id);
-        //     if (booking == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return View(booking);
-        // }
+        // Відображає форму для редагування існуючого бронювання    GetBookingByIdAsync
+        public async Task<IActionResult> EditBooking(int id)
+        {
+            var booking = await _service.GetBookingByIdAsync(id);
+            if (booking == null)
+            {
+                return NotFound();
+            }
+            return View(booking);
+        }
+
+        // Оновлює існуюче бронювання
+        [HttpPost]
+        public async Task<IActionResult> EditBooking(Booking booking)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateBookingAsync(booking);
+                return RedirectToAction("Index");
+            }
+            return View(booking);
+        }
+
+        // Видаляє бронювання
+        public async Task<IActionResult> DeleteBooking(int id)
+        {
+            var booking = await _service.GetBookingByIdAsync(id);
+            if (booking == null)
+            {
+                return NotFound();
+            }
+            return View(booking);
+        }
+
+        // Підтвердження видалення бронювання
+        [HttpPost, ActionName("DeleteBooking")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _service.DeleteBookingAsync(id);
+            return RedirectToAction("Index");
+        }
+
+        // Відображає деталі бронювання
+        public async Task<IActionResult> Details(int id)
+        {
+            var booking = await _service.GetBookingByIdAsync(id);
+            if (booking == null)
+            {
+                return NotFound();
+            }
+            return View(booking);
+        }
     }
 }

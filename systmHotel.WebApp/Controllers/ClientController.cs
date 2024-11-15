@@ -15,7 +15,8 @@ namespace systmHotel.WebApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var client = new Client() {Email="Loh@sdf.com", PhoneNumber="94857923", Bookings=new List<Booking>(){ new Booking() { BookingDate=DateTime.UtcNow} } };
+            return View(client);
         }
 
         [HttpGet]
@@ -28,10 +29,16 @@ namespace systmHotel.WebApp.Controllers
         {
             _clientService.AddClientAsync(client);
             return Redirect("/Client/Index");
-        }     
+        }
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult Login(Client client)
+        {
+            return RedirectToAction("Index");
         }
         public IActionResult History(int clientId)
         {

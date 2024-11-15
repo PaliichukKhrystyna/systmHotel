@@ -13,6 +13,6 @@ namespace systmHotel.DAL.IRepository
         Task<Booking> GetBookingByIdAsync(int id);
         Task AddBookingAsync(Booking booking);
         Task UpdateBookingAsync(Booking booking);
-        Task DeleteBookingAsync(int id);
+        Task DeleteBookingAsync(int bookingId);
     }
 }

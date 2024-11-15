@@ -20,6 +20,11 @@ namespace systmHotel.BLL.Services
             return await _bookingRepository.GetAllBookingsAsync();
         }
 
+        public async Task<Booking> GetBookingByIdAsync(int bookingId)
+        {
+            return await _bookingRepository.GetBookingByIdAsync(bookingId);
+        }
+
         public async Task AddBookingAsync(Booking booking)
         {
             await _bookingRepository.AddBookingAsync(booking);

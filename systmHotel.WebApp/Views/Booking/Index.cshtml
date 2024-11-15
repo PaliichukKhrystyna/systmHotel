@@ -1,23 +1,50 @@
 ﻿@model IEnumerable<systmHotel.DAL.Entities.Booking>
 
-<h1>Bookings List</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookings List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .actions a {
+            margin-right: 5px;
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bookings List</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Client ID</th>
-            <th>Room ID</th>
-            <th>Booking Date</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Total Amount</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var booking in Model)
-        {
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Client ID</th>
+                <th>Room ID</th>
+                <th>Booking Date</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Total Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
                 <tr>
                     <td>@booking.BookingID</td>
                     <td>@booking.ClientID</td>
@@ -26,14 +53,17 @@
                     <td>@booking.StartDate.ToShortDateString()</td>
                     <td>@booking.EndDate.ToShortDateString()</td>
                     <td>@booking.TotalAmount</td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@booking.BookingID">Details</a> |
-                        <a asp-action="EditBooking" asp-route-id="@booking.BookingID">Edit</a> |
+                    <td class="actions">
+                        <a asp-action="Details" asp-route-id="@booking.BookingID">Details</a>
+                        <a asp-action="EditBooking" asp-route-id="@booking.BookingID">Edit</a>
                         <a asp-action="DeleteBooking" asp-route-id="@booking.BookingID">Delete</a>
                     </td>
                 </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
 
-<a asp-action="AddBooking">Add New Booking</a>
+    <a href="/Booking/AddBooking">Add New Booking</a>
+</body>
+</html>
+

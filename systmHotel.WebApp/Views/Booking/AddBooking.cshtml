@@ -1,31 +1,63 @@
 ﻿@model systmHotel.DAL.Entities.Booking
 
-<h1>Add Booking</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Booking</title>
+    <style>
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
 
-<form asp-action="AddBooking" method="post">
-    <div>
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    <h1>Add Booking</h1>
+
+    <form asp-action="AddBooking" method="post">
         <label asp-for="ClientID">Client ID:</label>
         <input asp-for="ClientID" />
-    </div>
-    <div>
+
         <label asp-for="RoomID">Room ID:</label>
         <input asp-for="RoomID" />
-    </div>
-    <div>
+
         <label asp-for="BookingDate">Booking Date:</label>
         <input asp-for="BookingDate" type="date" />
-    </div>
-    <div>
+
         <label asp-for="StartDate">Start Date:</label>
         <input asp-for="StartDate" type="date" />
-    </div>
-    <div>
+
         <label asp-for="EndDate">End Date:</label>
         <input asp-for="EndDate" type="date" />
-    </div>
-    <div>
+
         <label asp-for="TotalAmount">Total Amount:</label>
         <input asp-for="TotalAmount" type="number" step="0.01" />
-    </div>
-    <button type="submit">Add</button>
-</form>
+
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>

@@ -1,4 +1,7 @@
 using systmHotel.BLL.Services;
+using systmHotel.DAL.Context;
+using systmHotel.DAL.IRepository;
+using systmHotel.DAL.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ClientService>();
+
+builder.Services.AddDbContext<systHotelContext>();
+
+builder.Services.AddScoped<BookingService>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();    
+
+builder.Services.AddScoped<ServiceService>();
 
 
 var app = builder.Build();
