@@ -15,7 +15,7 @@ namespace systmHotel.WebApp.Controllers
 
         public IActionResult Index()
         {
-            var client = new Client() {Email="Loh@sdf.com", PhoneNumber="94857923", Bookings=new List<Booking>(){ new Booking() { BookingDate=DateTime.UtcNow} } };
+            var client = new Client() {Email="Client@sdf.com", PhoneNumber="94857923", Bookings=new List<Booking>(){ new Booking() { BookingDate=DateTime.UtcNow} } };
             return View(client);
         }
 
