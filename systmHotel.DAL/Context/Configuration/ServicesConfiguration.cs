@@ -26,6 +26,10 @@ namespace systmHotel.DAL.Context.Configuration
             builder.Property(s => s.Price)
                 .IsRequired();
 
+
+
+
         }
+
     }
 }

@@ -44,6 +44,13 @@ namespace systmHotel.WebApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // Очищення сесії
+            return RedirectToAction("Login");
+        }
+
     }
 }
 

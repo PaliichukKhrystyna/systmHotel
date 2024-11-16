@@ -39,11 +39,11 @@
     <h1>Add Booking</h1>
 
     <form asp-action="AddBooking" method="post">
-        <label asp-for="ClientID">Client ID:</label>
+       @* <label asp-for="ClientID">Client ID:</label>
         <input asp-for="ClientID" />
 
         <label asp-for="RoomID">Room ID:</label>
-        <input asp-for="RoomID" />
+        <input asp-for="RoomID" />*@
 
         <label asp-for="BookingDate">Booking Date:</label>
         <input asp-for="BookingDate" type="date" />
@@ -54,8 +54,8 @@
         <label asp-for="EndDate">End Date:</label>
         <input asp-for="EndDate" type="date" />
 
-        <label asp-for="TotalAmount">Total Amount:</label>
-        <input asp-for="TotalAmount" type="number" step="0.01" />
+       @* <label asp-for="TotalAmount">Total Amount:</label>
+        <input asp-for="TotalAmount" type="number" step="0.01" />*@
 
         <button type="submit">Add</button>
     </form>
