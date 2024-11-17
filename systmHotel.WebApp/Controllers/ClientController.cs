@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using systmHotel.BLL.Services;
 using systmHotel.DAL.Entities;
 
@@ -13,44 +14,114 @@ namespace systmHotel.WebApp.Controllers
             _clientService = clientService;
         }
 
-        public IActionResult Index()
+        // Головна сторінка клієнта
+        public async Task<IActionResult> Index()
         {
-            var client = new Client() {Email="Client@sdf.com", PhoneNumber="94857923", Bookings=new List<Booking>(){ new Booking() { BookingDate=DateTime.UtcNow} } };
+            // Імітація отримання даних про поточного клієнта (замінити на реальну логіку отримання даних з авторизації)
+            var clientId = 1; // ID авторизованого клієнта
+            var client = await _clientService.GetClientByIdAsync(clientId);
+
+            if (client == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             return View(client);
         }
 
+        // GET: Реєстрація клієнта
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
+        // POST: Реєстрація клієнта
         [HttpPost]
-        public IActionResult Register(Client client)
+        public async Task<IActionResult> Register(Client client)
         {
-            _clientService.AddClientAsync(client);
-            return Redirect("/Client/Index");
+            if (ModelState.IsValid)
+            {
+                await _clientService.AddClientAsync(client);
+                return RedirectToAction("Login");
+            }
+            return View(client);
         }
+
+        // GET: Логін клієнта
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+
+        // POST: Логін клієнта
         [HttpPost]
-        public IActionResult Login(Client client)
+        public async Task<IActionResult> Login(string email, string password)
         {
+            var client = (await _clientService.GetAllClientsAsync())
+                .FirstOrDefault(c => c.Email == email && c.Password == password);
+
+            if (client == null)
+            {
+                ViewBag.Error = "Невірний email або пароль.";
+                return View();
+            }
+
+            // Збереження даних клієнта у сесії (або іншому механізмі)
+            HttpContext.Session.SetString("ClientId", client.ClientID.ToString());
             return RedirectToAction("Index");
         }
-        public IActionResult History(int clientId)
+
+        // GET: Перегляд історії бронювань
+        public async Task<IActionResult> History()
         {
-            return View();
+            // Отримання ID клієнта з сесії
+            var clientId = int.Parse(HttpContext.Session.GetString("ClientId"));
+            var client = await _clientService.GetClientByIdAsync(clientId);
+
+            if (client == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View(client.Bookings); // Передача бронювань у View
         }
 
+        // GET: Оновлення профілю
+        [HttpGet]
+        public async Task<IActionResult> EditProfile()
+        {
+            var clientId = int.Parse(HttpContext.Session.GetString("ClientId"));
+            var client = await _clientService.GetClientByIdAsync(clientId);
+
+            if (client == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View(client);
+        }
+
+        // POST: Оновлення профілю
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(Client client)
+        {
+            if (ModelState.IsValid)
+            {
+                await _clientService.UpdateClientAsync(client);
+                return RedirectToAction("Index");
+            }
+            return View(client);
+        }
+
+        // Логаут клієнта
         public IActionResult Logout()
         {
             HttpContext.Session.Clear(); // Очищення сесії
             return RedirectToAction("Login");
         }
-
     }
 }
+
 

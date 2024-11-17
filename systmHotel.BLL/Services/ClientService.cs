@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using systmHotel.DAL.Entities;
+﻿using systmHotel.DAL.Entities;
 using systmHotel.DAL.IRepository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace systmHotel.BLL.Services
 {
@@ -15,14 +17,19 @@ namespace systmHotel.BLL.Services
             _clientRepository = clientRepository;
         }
 
-        public async Task<IEnumerable<Client>> GetClientsAsync()
+        public async Task AddClientAsync(Client client)
+        {
+            await _clientRepository.AddClientAsync(client);
+        }
+
+        public async Task<IEnumerable<Client>> GetAllClientsAsync()
         {
             return await _clientRepository.GetAllClientsAsync();
         }
 
-        public async Task AddClientAsync(Client client)
+        public async Task<Client> GetClientByIdAsync(int id)
         {
-            await _clientRepository.AddClientAsync(client);
+            return await _clientRepository.GetClientByIdAsync(id);
         }
 
         public async Task UpdateClientAsync(Client client)
@@ -30,13 +37,9 @@ namespace systmHotel.BLL.Services
             await _clientRepository.UpdateClientAsync(client);
         }
 
-        public async Task DeleteClientAsync(int clientId)
+        public async Task DeleteClientAsync(Client client)
         {
-          
-            
-                await _clientRepository.DeleteClientAsync(clientId);
-            
+            await _clientRepository.DeleteClientAsync(client.ClientID);
         }
     }
 }
-
