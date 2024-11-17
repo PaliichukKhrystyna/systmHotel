@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using systmHotel.BLL.Services;
 using systmHotel.DAL.Context;
 using systmHotel.DAL.IRepository;
@@ -10,7 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ClientService>();
 
-builder.Services.AddDbContext<systHotelContext>();
+builder.Services.AddDbContext<systHotelContext>(options=>options.UseSqlite("Data source=systmHotelDB.sql",b => b.MigrationsAssembly("systmHotel.DAL")));
 
 builder.Services.AddScoped<BookingService>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();

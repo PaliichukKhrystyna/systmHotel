@@ -85,7 +85,7 @@ namespace systmHotel.WebApp.Controllers
                 return RedirectToAction("Login");
             }
 
-            return View(client.Bookings); // Передача бронювань у View
+            return View(/*client.Bookings*/);
         }
 
         // GET: Оновлення профілю

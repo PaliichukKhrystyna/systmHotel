@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using systmHotel.DAL.Entities;
@@ -10,7 +11,7 @@ namespace systmHotel.DAL.Context
 {
     public class systHotelContext : DbContext
     {
-        public systHotelContext() { }
+        public systHotelContext(DbContextOptions options):base(options) { }
 
 
         public DbSet<Booking> Bookings { get; set; }
@@ -19,13 +20,9 @@ namespace systmHotel.DAL.Context
         public DbSet<Service> Services { get; set; }
 
 
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseSqlServer("YourConnectionStringHere");
-        //    }
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
     }
 }

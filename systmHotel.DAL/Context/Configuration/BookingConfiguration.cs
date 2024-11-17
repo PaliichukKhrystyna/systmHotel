@@ -45,9 +45,9 @@ namespace systmHotel.DAL.Context.Configuration
             //Звязки 
 
             //Many to many
-            builder.HasMany(b => b.Services)
-                    .WithMany(s => s.Bookings)
-                    .UsingEntity(j => j.ToTable("BookingServices"));
+            builder.HasMany(s => s.Services)
+                .WithMany(c => c.Bookings)
+                .UsingEntity(j => j.ToTable("BookingServices"));
 
             //one to many
             builder.HasOne(b => b.Client)

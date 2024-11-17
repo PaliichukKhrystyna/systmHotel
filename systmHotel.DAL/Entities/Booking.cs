@@ -20,6 +20,6 @@ namespace systmHotel.DAL.Entities
 
         public virtual Room? Room { get; set; }
         public virtual Client? Client { get; set; }
-        public IEnumerable<Service>? Services { get; set; }
+        public ICollection<Service> Services { get; set; }
     }
 }

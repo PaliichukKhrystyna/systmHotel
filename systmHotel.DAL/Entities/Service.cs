@@ -9,10 +9,9 @@ namespace systmHotel.DAL.Entities
     public class Service
     {
         public int ServiceID { get; set; }
-        public Booking? Booking { get; set; }
         public string? ServiceName { get; set; }
         public decimal Price { get; set; }
 
-        public IEnumerable<Booking> Bookings { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
     }
 }
