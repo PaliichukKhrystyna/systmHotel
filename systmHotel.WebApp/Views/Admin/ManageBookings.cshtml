@@ -1,0 +1,56 @@
+﻿@model IEnumerable<systmHotel.DAL.Entities.Booking>
+
+@{
+    ViewData["Title"] = "Manage Bookings";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Manage Bookings</h1>
+
+    <!-- Таблиця бронювань -->
+    <table class="table table-hover table-bordered mt-4">
+        <thead class="table-dark">
+            <tr>
+                <th>Booking ID</th>
+                <th>Client ID</th>
+                <th>Room ID</th>
+                <th>Booking Date</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Total Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.BookingID</td>
+                    <td>@booking.ClientID</td>
+                    <td>@booking.RoomID</td>
+                    <td>@booking.BookingDate.ToString("yyyy-MM-dd")</td>
+                    <td>@booking.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@booking.EndDate.ToString("yyyy-MM-dd")</td>
+                    <td>@booking.TotalAmount.ToString("C")</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <!-- Кнопка редагування -->
+                            <a asp-action="EditBooking" asp-route-bookingId="@booking.BookingID" asp-route-adminId="@ViewBag.AdminID" class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+
+                            <!-- Кнопка видалення -->
+                            <a asp-action="DeleteBooking" asp-route-bookingId="@booking.BookingID" asp-route-adminId="@ViewBag.AdminID" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center mt-3">
+        <a asp-action="Dashboard" asp-route-adminId="@ViewBag.AdminID" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+</div>

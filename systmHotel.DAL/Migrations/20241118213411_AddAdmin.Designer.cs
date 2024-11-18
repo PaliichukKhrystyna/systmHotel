@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using systmHotel.DAL.Context;
 
@@ -11,9 +12,10 @@ using systmHotel.DAL.Context;
 namespace systmHotel.DAL.Migrations
 {
     [DbContext(typeof(systHotelContext))]
-    partial class systHotelContextModelSnapshot : ModelSnapshot
+    [Migration("20241118213411_AddAdmin")]
+    partial class AddAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.35");

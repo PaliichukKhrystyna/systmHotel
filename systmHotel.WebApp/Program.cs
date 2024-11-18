@@ -2,7 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using systmHotel.BLL.Services;
 using systmHotel.DAL.Context;
 using systmHotel.DAL.IRepository;
+using systmHotel.DAL.IRepositoryy;
 using systmHotel.DAL.Repository;
+using systmHotel.DAL.Repositoryy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,8 @@ builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 
 builder.Services.AddScoped<ServiceService>();
 
+builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 var app = builder.Build();
 

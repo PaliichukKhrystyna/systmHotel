@@ -49,6 +49,15 @@ namespace systmHotel.DAL.Repository
             }
         }
 
+        //public async Task DeleteClientAsync(int id)
+        //{
+        //    var client = await _context.Clients.FirstOrDefaultAsync(c => c.ClientID == id);
+        //    if (client != null)
+        //    {
+        //        _context.Clients.Remove(client);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //}
         public async Task DeleteClientAsync(int id)
         {
             var client = await _context.Clients.FirstOrDefaultAsync(c => c.ClientID == id);
@@ -58,5 +67,6 @@ namespace systmHotel.DAL.Repository
                 await _context.SaveChangesAsync();
             }
         }
+
     }
 }

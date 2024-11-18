@@ -37,9 +37,14 @@ namespace systmHotel.BLL.Services
             await _clientRepository.UpdateClientAsync(client);
         }
 
-        public async Task DeleteClientAsync(Client client)
+        public async Task DeleteClientAsync(int clientId)
         {
-            await _clientRepository.DeleteClientAsync(client.ClientID);
+            var client = await _clientRepository.GetClientByIdAsync(clientId); // Отримуємо клієнта за ID
+            if (client != null)
+            {
+                await _clientRepository.DeleteClientAsync(client.ClientID); // Видаляємо клієнта
+            }
         }
+
     }
 }
