@@ -8,10 +8,13 @@ namespace systmHotel.WebApp.Controllers
     public class ClientController : Controller
     {
         private readonly ClientService _clientService;
+        private readonly BookingService _bookingService;
 
-        public ClientController(ClientService clientService)
+
+        public ClientController(ClientService clientService, BookingService bookingService)
         {
             _clientService = clientService;
+            _bookingService = bookingService;
         }
 
         // Головна сторінка клієнта
@@ -133,6 +136,36 @@ namespace systmHotel.WebApp.Controllers
             // Логаут тепер просто перенаправляє на сторінку входу
             return RedirectToAction("Login");
         }
+
+
+        [HttpGet]
+        public IActionResult CreateBooking(int clientId)
+        {
+            var booking = new Booking
+            {
+                ClientID = clientId,
+                BookingDate = DateTime.UtcNow // Поточна дата
+            };
+
+            return View(booking);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateBooking(Booking booking)
+        {
+            if (ModelState.IsValid)
+            {
+                await _bookingService.AddBookingAsync(booking); // Реалізуйте відповідний метод у BookingService
+                return RedirectToAction("Index", new { clientId = booking.ClientID });
+            }
+
+            return View(booking);
+        }
+
+
+
+
+
     }
 }
 
