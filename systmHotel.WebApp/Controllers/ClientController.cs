@@ -15,10 +15,8 @@ namespace systmHotel.WebApp.Controllers
         }
 
         // Головна сторінка клієнта
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int clientId)
         {
-            // Імітація отримання даних про поточного клієнта (замінити на реальну логіку отримання даних з авторизації)
-            var clientId = 1; // ID авторизованого клієнта
             var client = await _clientService.GetClientByIdAsync(clientId);
 
             if (client == null)
@@ -68,31 +66,45 @@ namespace systmHotel.WebApp.Controllers
                 return View();
             }
 
-            // Збереження даних клієнта у сесії (або іншому механізмі)
-            HttpContext.Session.SetString("ClientId", client.ClientID.ToString());
-            return RedirectToAction("Index");
+            // Перенаправлення на головну сторінку з ClientID як параметром
+            return RedirectToAction("Index", new { clientId = client.ClientID });
         }
 
         // GET: Перегляд історії бронювань
-        public async Task<IActionResult> History()
+        //public async Task<IActionResult> History(int clientId)
+        //{
+        //    var client = await _clientService.GetClientByIdAsync(clientId);
+
+        //    if (client == null)
+        //    {
+        //        return RedirectToAction("Login");
+        //    }
+
+        //    return View(client.Bookings); // Передаємо бронювання у View
+        //}
+        public async Task<IActionResult> History(int clientId)
         {
-            // Отримання ID клієнта з сесії
-            var clientId = int.Parse(HttpContext.Session.GetString("ClientId"));
+            // Отримати клієнта разом із бронюваннями
             var client = await _clientService.GetClientByIdAsync(clientId);
 
             if (client == null)
             {
+                // Якщо клієнта не знайдено, перенаправляємо на сторінку логіну
                 return RedirectToAction("Login");
             }
 
-            return View(/*client.Bookings*/);
+            // Якщо бронювання не завантажено або null, ініціалізуємо пустий список
+            client.Bookings ??= new List<Booking>();
+
+            // Передаємо модель клієнта у View
+            return View(client);
         }
+
 
         // GET: Оновлення профілю
         [HttpGet]
-        public async Task<IActionResult> EditProfile()
+        public async Task<IActionResult> EditProfile(int clientId)
         {
-            var clientId = int.Parse(HttpContext.Session.GetString("ClientId"));
             var client = await _clientService.GetClientByIdAsync(clientId);
 
             if (client == null)
@@ -110,7 +122,7 @@ namespace systmHotel.WebApp.Controllers
             if (ModelState.IsValid)
             {
                 await _clientService.UpdateClientAsync(client);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { clientId = client.ClientID });
             }
             return View(client);
         }
@@ -118,10 +130,11 @@ namespace systmHotel.WebApp.Controllers
         // Логаут клієнта
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear(); // Очищення сесії
+            // Логаут тепер просто перенаправляє на сторінку входу
             return RedirectToAction("Login");
         }
     }
 }
+
 
 

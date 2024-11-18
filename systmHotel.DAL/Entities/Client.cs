@@ -18,7 +18,8 @@ namespace systmHotel.DAL.Entities
         public string? PasswordSecret { get; set; }
         public bool Status { get; set; }
 
-        public virtual IEnumerable<Booking>? Bookings { get; set; }
+        public virtual IEnumerable<Booking> Bookings { get; set; } = new List<Booking>(); // Ініціалізація списку
+        //public virtual IEnumerable<Booking>? Bookings { get; set; }
 
     }
 }
