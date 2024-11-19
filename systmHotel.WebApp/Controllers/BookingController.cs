@@ -14,83 +14,95 @@ namespace systmHotel.WebApp.Controllers
             _service = service;
         }
 
-        // Відображає список бронювань
         public async Task<IActionResult> Index()
         {
-            //var bookings = await _service.GetBookingsAsync();
-            //return View(bookings);
-            return View(_service.GetBookingsAsync().Result);
+            var bookings = await _service.GetBookingsAsync();
+            return View(bookings);
         }
 
-        // Відображає форму для додавання нового бронювання
         public IActionResult AddBooking()
         {
-            return View();
+            return View(new Booking { BookingDate = DateTime.UtcNow });
         }
 
-        // Додає нове бронювання
         [HttpPost]
         public async Task<IActionResult> AddBooking(Booking booking)
         {
-            if (ModelState.IsValid)
+            try
             {
-                await _service.AddBookingAsync(booking);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    await _service.AddBookingAsync(booking);
+                    TempData["SuccessMessage"] = "Booking successfully added.";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Failed to add booking.");
             }
             return View(booking);
         }
 
-        // Відображає форму для редагування існуючого бронювання    GetBookingByIdAsync
         public async Task<IActionResult> EditBooking(int id)
         {
             var booking = await _service.GetBookingByIdAsync(id);
             if (booking == null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Booking not found.";
+                return RedirectToAction("Index");
             }
             return View(booking);
         }
 
-        // Оновлює існуюче бронювання
         [HttpPost]
         public async Task<IActionResult> EditBooking(Booking booking)
         {
             if (ModelState.IsValid)
             {
                 await _service.UpdateBookingAsync(booking);
+                TempData["SuccessMessage"] = "Booking successfully updated.";
                 return RedirectToAction("Index");
             }
             return View(booking);
         }
 
-        // Видаляє бронювання
         public async Task<IActionResult> DeleteBooking(int id)
         {
             var booking = await _service.GetBookingByIdAsync(id);
             if (booking == null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Booking not found.";
+                return RedirectToAction("Index");
             }
             return View(booking);
         }
 
-        // Підтвердження видалення бронювання
         [HttpPost, ActionName("DeleteBooking")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _service.DeleteBookingAsync(id);
+            try
+            {
+                await _service.DeleteBookingAsync(id);
+                TempData["SuccessMessage"] = "Booking successfully deleted.";
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Failed to delete booking.";
+            }
             return RedirectToAction("Index");
         }
 
-        // Відображає деталі бронювання
         public async Task<IActionResult> Details(int id)
         {
             var booking = await _service.GetBookingByIdAsync(id);
             if (booking == null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Booking not found.";
+                return RedirectToAction("Index");
             }
             return View(booking);
         }
     }
 }
+

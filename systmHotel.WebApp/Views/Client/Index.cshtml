@@ -1,64 +1,122 @@
 ﻿@model systmHotel.DAL.Entities.Client;
 
-
 @{
     ViewData["Title"] = "Client Details";
 }
 
-@*<h2>Client Details</h2>*@
-<div class="text-end mb-3">
-    <a href="/Client/EditProfile?clientId=@Model.ClientID" class="btn btn-primary">Edit Profile</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
 
-<div>
-    <h3>Client Information</h3>
-    <p><strong>Email:</strong> @Model.Email</p>
-    <p><strong>Phone:</strong> @Model.PhoneNumber</p>
-</div>
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-<div>
-    <a asp-action="CreateBooking" asp-route-clientId="@Model.ClientID" class="btn btn-primary">Booking</a>
-</div>
+        h1, h3 {
+            text-align: center;
+            color: #007bff;
+        }
 
+        .client-info, .actions {
+            margin-bottom: 20px;
+        }
 
+            .client-info p {
+                font-size: 1.1rem;
+                color: #343a40;
+                margin: 5px 0;
+            }
 
-<div>
-    <a asp-action="History" asp-route-clientId="@Model.ClientID" class="btn btn-secondary">View Booking History</a>
-</div>
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
 
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
 
-@*<div>
-    <h3>Last 10 Bookings</h3>
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
 
-    @if (Model.Bookings.Any())
-    {
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Check-In Date</th>
-                    <th>Check-Out Date</th>
-                    <th>Room Number</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var booking in Model.Bookings)
-                {
-                    <tr>
-                        <td></td>
-                        <td>@booking.BookingDate.ToString("yyyy-MM-dd")</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p>No bookings available.</p>
-    }
-</div>
-*@
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+            }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        .last-bookings {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+            table th, table td {
+                padding: 10px;
+                border: 1px solid #ddd;
+                text-align: center;
+            }
+
+            table th {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            table tr:hover {
+                background-color: #f1f1f1;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Client Details</h1>
+
+        <div class="client-info">
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Phone:</strong> @Model.PhoneNumber</p>
+        </div>
+
+        <div class="actions btn-container">
+            <a href="/Client/EditProfile?clientId=@Model.ClientID" class="btn btn-primary">Edit Profile</a>
+            <a asp-controller="Booking" asp-action="AddBooking" asp-route-clientId="@Model.ClientID" class="btn btn-primary">Add Booking</a>
+
+            <a asp-controller="Booking" asp-action="Details" asp-route-id="@Model.ClientID" class="btn btn-secondary">Details</a>
+
+        </div>
+
+        
+</body>
+</html>

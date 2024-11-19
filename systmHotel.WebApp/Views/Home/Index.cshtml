@@ -9,33 +9,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
     <style>
-        .text-center {
+        /* Загальні стилі */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 0;
             text-align: center;
-            margin-top: 50px;
         }
 
-        .display-4 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+            header h1 {
+                margin: 0;
+                font-size: 2.5rem;
+            }
+
+        nav {
+            margin-top: 10px;
         }
 
-        .welcome-text a {
-            color: #007bff;
-            text-decoration: none;
+            nav a {
+                color: white;
+                text-decoration: none;
+                margin: 0 15px;
+                font-weight: bold;
+            }
+
+                nav a:hover {
+                    text-decoration: underline;
+                }
+
+        /* Секція "Ласкаво просимо" */
+        .welcome-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #e9ecef;
         }
 
-            .welcome-text a:hover {
-                text-decoration: underline;
+            .welcome-section h2 {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+
+            .welcome-section p {
+                font-size: 1.2rem;
+                line-height: 1.5;
+            }
+
+            .welcome-section a {
+                color: #007bff;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+                .welcome-section a:hover {
+                    text-decoration: underline;
+                }
+
+        /* Секція "Про нас" */
+        .about-section {
+            padding: 50px 20px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+            .about-section h2 {
+                font-size: 2rem;
+                margin-bottom: 20px;
+                color: #007bff;
+            }
+
+            .about-section p {
+                font-size: 1.2rem;
+                line-height: 1.6;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+        /* Футер */
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+            footer p {
+                margin: 0;
+                font-size: 0.9rem;
             }
     </style>
 </head>
 <body>
 
-    <div class="text-center">
-        <h1 class="display-4">Welcome to system hotel</h1>
-       
+    <header>
+        <h1>Welcome to System Hotel</h1>
+        
+    </header>
+
+    <!-- Ласкаво просимо -->
+    <div class="welcome-section">
+        <h2>Experience Comfort and Elegance</h2>
+        <p>
+            At <strong>System Hotel</strong>, we offer premium hospitality services that make every stay a memorable one.
+            Book your room today and enjoy the finest amenities.
+        </p>
+      
     </div>
+
+    <!-- Про нас -->
+    <div class="about-section">
+        <h2>About Us</h2>
+        <p>
+            System Hotel is a hotel system with a rich history of serving customers from all over the world.  
+            Our mission is to make every guest feel like royalty, whether you're here for business or pleasure.
+        </p>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <p>&copy; 2024 System Hotel. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>

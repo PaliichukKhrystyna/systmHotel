@@ -21,5 +21,7 @@ namespace systmHotel.DAL.Entities
         public virtual Room? Room { get; set; }
         public virtual Client? Client { get; set; }
         public ICollection<Service> Services { get; set; }
+
+        // Навігаційна властивість для клієнта
     }
 }

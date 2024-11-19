@@ -1,56 +1,89 @@
 ﻿@model systmHotel.DAL.Entities.Booking
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Details</title>
     <style>
-        dl {
-            width: 300px;
-            margin: 0 auto;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
         }
 
-        dt {
-            font-weight: bold;
-            margin-top: 10px;
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        dd {
-            margin-left: 20px;
-        }
-
-        a {
-            display: block;
-            margin-top: 20px;
+        h1 {
             text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            font-size: 1.1rem;
+        }
+
+            .details p {
+                margin: 5px 0;
+            }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             text-decoration: none;
-            color: blue;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+            }
+
+        .btn-container {
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Booking Details</h1>
+    <div class="container">
+        <h1>Booking Details</h1>
+        <div class="details">
+            <p><strong>Booking ID:</strong> @Model.BookingID</p>
+            <p><strong>Start Date:</strong> @Model.StartDate.ToString("yyyy-MM-dd")</p>
+            <p><strong>End Date:</strong> @Model.EndDate.ToString("yyyy-MM-dd")</p>
+            <p><strong>Room ID:</strong> @Model.RoomID</p>
+            <p><strong>Total Amount:</strong> @Model.TotalAmount.ToString("C")</p>
+            <p><strong>Booking Date:</strong> @Model.BookingDate.ToString("yyyy-MM-dd")</p>
+        </div>
+        <div class="btn-container mt-4">
+            <a asp-controller="Client" asp-action="Index" asp-route-clientId="@Model.ClientID" class="btn btn-secondary">Back to Profile</a>
 
-    <dl>
-        <dt>Client ID:</dt>
-        <dd>@Model.ClientID</dd>
-
-        <dt>Room ID:</dt>
-        <dd>@Model.RoomID</dd>
-
-        <dt>Booking Date:</dt>
-        <dd>@Model.BookingDate.ToShortDateString()</dd>
-
-        <dt>Start Date:</dt>
-        <dd>@Model.StartDate.ToShortDateString()</dd>
-
-        <dt>End Date:</dt>
-        <dd>@Model.EndDate.ToShortDateString()</dd>
-
-      @*  <dt>Total Amount:</dt>
-        <dd>@Model.TotalAmount</dd>*@
-    </dl>
-
-    <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
 </body>
 </html>

@@ -39,5 +39,12 @@ namespace systmHotel.BLL.Services
         {
             await _bookingRepository.DeleteBookingAsync(bookingId);
         }
+
+
+
+
+
+
+
     }
 }
