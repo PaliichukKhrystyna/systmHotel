@@ -17,6 +17,17 @@
 </div>
 
 <div>
+    <a asp-action="CreateBooking" asp-route-clientId="@Model.ClientID" class="btn btn-primary">Booking</a>
+</div>
+
+
+
+<div>
+    <a asp-action="History" asp-route-clientId="@Model.ClientID" class="btn btn-secondary">View Booking History</a>
+</div>
+
+
+@*<div>
     <h3>Last 10 Bookings</h3>
 
     @if (Model.Bookings.Any())
@@ -50,4 +61,4 @@
         <p>No bookings available.</p>
     }
 </div>
-
+*@

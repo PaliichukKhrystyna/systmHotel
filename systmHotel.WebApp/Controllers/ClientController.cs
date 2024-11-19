@@ -85,6 +85,11 @@ namespace systmHotel.WebApp.Controllers
 
         //    return View(client.Bookings); // Передаємо бронювання у View
         //}
+
+
+
+        //історія бронювання клієнта
+        [HttpGet]
         public async Task<IActionResult> History(int clientId)
         {
             // Отримати клієнта разом із бронюваннями
