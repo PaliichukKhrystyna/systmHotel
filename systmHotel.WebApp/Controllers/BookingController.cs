@@ -2,6 +2,7 @@
 using systmHotel.DAL.Entities;
 using System.Threading.Tasks;
 using systmHotel.BLL.Services;
+using Microsoft.AspNetCore.Routing;
 
 namespace systmHotel.WebApp.Controllers
 {
@@ -13,35 +14,23 @@ namespace systmHotel.WebApp.Controllers
         {
             _service = service;
         }
-
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(int ClientID)
         {
-            var bookings = await _service.GetBookingsAsync();
+            var bookings = await _service.GetBookingsByClientAsync(ClientID);
             return View(bookings);
         }
 
         public IActionResult AddBooking()
         {
-            return View(new Booking { BookingDate = DateTime.UtcNow });
+            return View(new Booking { BookingDate = DateTime.UtcNow, StartDate = DateTime.UtcNow, EndDate = DateTime.Now });
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBooking(Booking booking)
+        public IActionResult AddBooking(Booking booking)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    await _service.AddBookingAsync(booking);
-                    TempData["SuccessMessage"] = "Booking successfully added.";
-                    return RedirectToAction("Index");
-                }
-            }
-            catch
-            {
-                ModelState.AddModelError("", "Failed to add booking.");
-            }
-            return View(booking);
+            _service.AddBookingAsync(booking).Wait();
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> EditBooking(int id)

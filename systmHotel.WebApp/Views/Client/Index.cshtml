@@ -111,9 +111,9 @@
 
         <div class="actions btn-container">
             <a href="/Client/EditProfile?clientId=@Model.ClientID" class="btn btn-primary">Edit Profile</a>
+            @Html.ActionLink("History", "Index", "Booking", new { ClientID = Model.ClientID })
             <a asp-controller="Booking" asp-action="AddBooking" asp-route-clientId="@Model.ClientID" class="btn btn-primary">Add Booking</a>
-
-            <a asp-controller="Booking" asp-action="Details" asp-route-id="@Model.ClientID" class="btn btn-secondary">Details</a>
+            <a asp-controller="Booking" asp-action="Details" asp-route-clientId="@Model.ClientID" class="btn btn-secondary">Details</a>
 
         </div>
 

@@ -60,5 +60,10 @@ namespace systmHotel.DAL.Repository
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Booking>> GetBookingsByClienIdAsync(int ClientId)
+        {
+            return await _context.Bookings.Where(b=>b.ClientID==ClientId).ToListAsync();
+        }
     }
 }

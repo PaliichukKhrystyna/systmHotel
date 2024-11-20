@@ -1,96 +1,68 @@
 ﻿@model systmHotel.DAL.Entities.Booking
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Booking</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
+@{
+    ViewData["Title"] = "AddBooking";
+}
 
-        .container {
-            max-width: 600px;
-            margin: 30px auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+<h1>AddBooking</h1>
 
-        h1 {
-            text-align: center;
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            font-weight: bold;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-            .btn-primary:hover {
-                background-color: #0056b3;
-            }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            color: #fff;
-        }
-
-            .btn-secondary:hover {
-                background-color: #5a6268;
-            }
-
-        .btn-container {
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Add Booking</h1>
-        <form asp-action="AddBooking" method="post">
-            <input type="hidden" asp-for="ClientID" />
-            <div class="mb-3">
-                <label asp-for="StartDate" class="form-label">Start Date</label>
-                <input asp-for="StartDate" type="date" class="form-control" required />
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddBooking">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BookingID" class="control-label"></label>
+                <input asp-for="BookingID" class="form-control" />
+                <span asp-validation-for="BookingID" class="text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="EndDate" class="form-label">End Date</label>
-                <input asp-for="EndDate" type="date" class="form-control" required />
+            <div class="form-group">
+                <label asp-for="ClientID" class="control-label"></label>
+                <input asp-for="ClientID" class="form-control" />
+                <span asp-validation-for="ClientID" class="text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="RoomID" class="form-label">Room ID</label>
-                <input asp-for="RoomID" type="number" class="form-control" required />
+            <div class="form-group">
+                <label asp-for="RoomID" class="control-label"></label>
+                <input asp-for="RoomID" class="form-control" />
+                <span asp-validation-for="RoomID" class="text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="TotalAmount" class="form-label">Total Amount</label>
-                <input asp-for="TotalAmount" type="number" step="0.01" class="form-control" required />
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Add Booking</button>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" class="form-control" />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
         </form>
-        <div class="btn-container mt-4">
-            <a asp-controller="Client" asp-action="Index" asp-route-clientId="@Model.ClientID" class="btn btn-secondary">Back to Profile</a>
-        </div>
     </div>
-</body>
-</html>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -9,6 +9,7 @@ namespace systmHotel.DAL.IRepository
 {
     public interface IBookingRepository
     {
+        Task<IEnumerable<Booking>> GetBookingsByClienIdAsync(int id);
         Task<IEnumerable<Booking>> GetAllBookingsAsync();
         Task<Booking> GetBookingByIdAsync(int id);
         Task AddBookingAsync(Booking booking);

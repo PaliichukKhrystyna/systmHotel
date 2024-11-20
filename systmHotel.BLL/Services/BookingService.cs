@@ -14,10 +14,14 @@ namespace systmHotel.BLL.Services
         {
             _bookingRepository = bookingRepository;
         }
-
         public async Task<IEnumerable<Booking>> GetBookingsAsync()
         {
             return await _bookingRepository.GetAllBookingsAsync();
+        }
+
+        public async Task<IEnumerable<Booking>> GetBookingsByClientAsync(int ClientId)
+        {
+            return await _bookingRepository.GetBookingsByClienIdAsync(ClientId);
         }
 
         public async Task<Booking> GetBookingByIdAsync(int bookingId)
